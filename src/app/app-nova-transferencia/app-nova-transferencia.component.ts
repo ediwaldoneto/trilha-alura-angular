@@ -12,4 +12,7 @@ export class AppNovaTransferenciaComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  transferir(){
+    console.log("Solicitado nova transfêrencia");
+  }
 }
