@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-nova-transferencia',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app-nova-transferencia.component.scss']
 })
 export class AppNovaTransferenciaComponent implements OnInit {
+  @Output() aoTransferir = new EventEmitter<any>();
 
   valor: number;
   destino: number;
@@ -15,9 +17,11 @@ export class AppNovaTransferenciaComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
   transferir(){
     console.log("Solicitado nova transfêrencia");
-    console.log("Valor ", this.valor);
-    console.log("Destino ",  this.destino);
+    const valorEnviar = {valor: this.valor, destino: this.destino};
+    this.aoTransferir.emit(valorEnviar);
+
   }
 }
