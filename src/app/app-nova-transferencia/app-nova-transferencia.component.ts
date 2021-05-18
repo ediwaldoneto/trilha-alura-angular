@@ -7,7 +7,9 @@ import { Output, EventEmitter } from '@angular/core';
   styleUrls: ['./app-nova-transferencia.component.scss']
 })
 export class AppNovaTransferenciaComponent implements OnInit {
+
   @Output() aoTransferir = new EventEmitter<any>();
+
 
   valor: number;
   destino: number;
@@ -21,15 +23,25 @@ export class AppNovaTransferenciaComponent implements OnInit {
   transferir() {
     console.log("Solicitado nova transfêrencia");
 
-    const valorEnviar = { valor: this.valor, destino: this.destino };
-    this.aoTransferir.emit(valorEnviar);
+    if (this.ehValido()) {
+      const valorEnviar = { valor: this.valor, destino: this.destino };
+      this.aoTransferir.emit(valorEnviar);
+      //this.limparCampos();
+    }
 
-    this.limparCampos();
+
   }
 
   limparCampos() {
     this.valor = 0;
     this.destino = 0;
-    console.log(this.valor, this.destino);
+  }
+
+  ehValido() {
+    const valido = this.valor && this.destino > 0;
+    if (!valido) {
+      console.log("Digite valores válidos");
+    }
+    return valido;
   }
 }
