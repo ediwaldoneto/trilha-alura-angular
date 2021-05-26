@@ -21,26 +21,23 @@ export class AppNovaTransferenciaComponent implements OnInit {
 
 
   transferir() {
-    console.log("Solicitado nova transfêrencia");
-
     if (this.ehValido()) {
       const valorEnviar = { valor: this.valor, destino: this.destino };
       this.aoTransferir.emit(valorEnviar);
-      //this.limparCampos();
+      this.limparCampos();
     }
-
 
   }
 
   limparCampos() {
-    this.valor = 0;
-    this.destino = 0;
+    this.valor = undefined;
+    this.destino = undefined;
   }
 
   ehValido() {
-    const valido = this.valor && this.destino > 0;
+    const valido = this.valor > 0 && this.destino != undefined;
     if (!valido) {
-      console.log("Digite valores válidos");
+      //console.log({ valor: this.valor, destino: this.destino });
     }
     return valido;
   }
